@@ -1,0 +1,39 @@
+---
+general:
+  buildTool: "npm"
+service:
+  buildToolVersion: "N12"
+  cloudConnectors:
+    transportRequestUploadCTS:
+      credentialId: "staging-cc"
+stages:
+  Build:
+    npmExecuteLint: false
+  Additional Unit Tests:
+    npmExecuteScripts: false
+    karmaExecuteTests: false
+  Malware Scan:
+    malwareExecuteScan: false
+  Compliance:
+    sonarExecuteScan: false
+  Release:
+    transportRequestUploadCTS: true
+steps:
+  npmExecuteLint:
+    failOnError: false
+  npmExecuteScripts:
+    runScripts:
+    - "test"
+  sonarExecuteScan:
+    mode: ""
+    serverUrl: ""
+    organization: ""
+    projectKey: ""
+    sonarTokenCredentialsId: ""
+  transportRequestUploadCTS:
+    endpoint: "http://gcpclm988017.wdf.sap.corp:50000 "
+    uploadCredentialsId: "abapusernew"
+    abapPackage: "ZSGPACK"
+    applicationName: "ZFABAPSample"
+    applicationDescription: "Fiori Sample Application"
+    transportRequestId: "JA1K900037"
